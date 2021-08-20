@@ -1,5 +1,6 @@
 Tipos de Usuário
 - idTipoUsuario(PK)
+- tipoUsuario
 
 Usuário
 - idUsuario(PK)
@@ -36,6 +37,7 @@ Endereco
 
 Especialidades
 - idEspecialidades(PK)
+- tipoEspecialidades
 
 Consultas(agendamento)
 - idConsulta(PK)
@@ -54,3 +56,4 @@ Clinica
 
 Situacao
 - idSituacao(PK)
+- tipoSituacao
