@@ -1,15 +1,19 @@
+--Criação Banco de Dados SPMEDICALGROUP_Livia
 CREATE DATABASE SPMEDICALGROUP_Livia;
 GO
 
+--Utilizando Banco de Dados SPMEDICALGROUP_Livia
 USE SPMEDICALGROUP_Livia;
 GO
 
+--Criação Tabela Tipo de Usuário
 CREATE TABLE TipoUsuario(
    IdTipoUsuario INT PRIMARY KEY IDENTITY(1,1),
    TipoUsuario VARCHAR(20) NOT NULL UNIQUE
 );
 GO
 
+--Criação Tabela Usuário
 CREATE TABLE Usuario(
    IdUsuario INT PRIMARY KEY IDENTITY(1,1),
    IdTipoUsuario INT FOREIGN KEY REFERENCES TipoUsuario(IdTipoUsuario),
@@ -18,6 +22,7 @@ CREATE TABLE Usuario(
 );
 GO
 
+--Criação Tabela Endereco
 CREATE TABLE Endereco(
    IdEndereco INT PRIMARY KEY IDENTITY(1,1),
    Logadouro VARCHAR(70) NOT NULL,
@@ -29,6 +34,7 @@ CREATE TABLE Endereco(
 );
 GO
 
+--Criação Tabela Clinica
 CREATE TABLE Clinica(
    IdClinica INT PRIMARY KEY IDENTITY(1,1),
    IdEndereco INT FOREIGN KEY REFERENCES Endereco(IdEndereco),
@@ -39,12 +45,14 @@ CREATE TABLE Clinica(
 );
 GO
 
+--Criação Tabela Especialidade
 CREATE TABLE Especialidade(
    IdEspecialidade INT PRIMARY KEY IDENTITY(1,1),
    Especialidade VARCHAR(50) NOT NULL
 );
 GO
 
+--Criação Tabela Paciente
 CREATE TABLE Paciente(
    IdPaciente INT PRIMARY KEY IDENTITY(1,1),
    IdUsuario INT FOREIGN KEY REFERENCES Usuario(IdUsuario),
@@ -57,6 +65,7 @@ CREATE TABLE Paciente(
 );
 GO
 
+--Criação Tabela Medico
 CREATE TABLE Medico(
    IdMedico INT PRIMARY KEY IDENTITY(1,1),
    IdUsuario INT FOREIGN KEY REFERENCES Usuario(IdUsuario),
@@ -67,12 +76,14 @@ CREATE TABLE Medico(
 );
 GO
 
+--Criação Tabela Situacao
 CREATE TABLE Situacao(
    IdSituacao INT PRIMARY KEY IDENTITY(1,1),
    TipoSituacao VARCHAR(30) NOT NULL
 );
 GO
 
+--Criação Tabela Consulta
 CREATE TABLE Consulta(
    IdConsulta INT PRIMARY KEY IDENTITY(1,1),
    IdPaciente INT FOREIGN KEY REFERENCES Paciente(IdPaciente),
@@ -85,13 +96,15 @@ GO
 
 
 
---ERROS
+-----------Arrumando Erros-----------
+
+--Excluindo Tabelas
 DROP TABLE Medico;
 DROP TABLE Consulta;
 DROP TABLE Clinica;
 DROP TABLE Paciente;
 
-
+--Criação Tabela Clinica Arrumada
 CREATE TABLE Clinica(
    IdClinica INT PRIMARY KEY IDENTITY(1,1),
    IdEndereco INT FOREIGN KEY REFERENCES Endereco(IdEndereco),
@@ -103,6 +116,7 @@ CREATE TABLE Clinica(
 );
 GO
 
+--Criação Tabela Medico Arrumada
 CREATE TABLE Medico(
    IdMedico INT PRIMARY KEY IDENTITY(1,1),
    IdUsuario INT FOREIGN KEY REFERENCES Usuario(IdUsuario),
@@ -113,6 +127,7 @@ CREATE TABLE Medico(
 );
 GO
 
+--Criação Tabela Consulta Arrumada
 CREATE TABLE Consulta(
    IdConsulta INT PRIMARY KEY IDENTITY(1,1),
    IdPaciente INT FOREIGN KEY REFERENCES Paciente(IdPaciente),
@@ -123,6 +138,7 @@ CREATE TABLE Consulta(
 );
 GO
 
+--Criação Tabela Paciente Arrumada
 CREATE TABLE Paciente(
    IdPaciente INT PRIMARY KEY IDENTITY(1,1),
    IdUsuario INT FOREIGN KEY REFERENCES Usuario(IdUsuario),
