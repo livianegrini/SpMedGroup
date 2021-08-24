@@ -43,7 +43,7 @@ ON Medico.IdClinica = Clinica.IdClinica
 GO
 
 --Prontuários
-SELECT Nome,Email,DataNascimento,Telefone,Rg,Cpf,Logadouro,Numero,Bairro,Municipio,Estado,Cep
+SELECT Nome,Email,FORMAT (DataNascimento, 'dd/MM/yyyy')[Data Nascimento],Telefone,Rg,Cpf,Logadouro,Numero,Bairro,Municipio,Estado,Cep
 FROM Paciente
 INNER JOIN Usuario
 ON Paciente.IdUsuario = Usuario.IdUsuario
@@ -56,7 +56,7 @@ SELECT FORMAT (DataCon, 'dd/MM/yyyy')[Data Consulta]  FROM Consulta;
 GO
 
 --Consultas
-SELECT Paciente.Nome Paciente,Medico.Nome Medico,DataCon  DataConsulta,Hora HoraConsulta, TipoSituacao
+SELECT Paciente.Nome Paciente,Medico.Nome Medico,FORMAT (DataCon, 'dd/MM/yyyy')[Data Consulta],Hora HoraConsulta, TipoSituacao
 FROM Consulta
 INNER JOIN Paciente
 ON Consulta.IdPaciente = Paciente.IdPaciente
@@ -90,15 +90,17 @@ RETURN
 @Nome VARCHAR(30)
     AS
  BEGIN
- SELECT IdClinica, Medico.Nome
+ SELECT IdClinica, Medico.Nome, DataCon
  FROM Consulta
  INNER JOIN Medico
  ON Consulta.IdMedico = Medico.IdMedico
+ WHERE Medico.Nome = @Nome
 END;
 GO
 
-EXEC QuantidadeConsultas'Ricardo Lemos';
+
+EXEC QuantidadeConsultas'Helena Strada';
 GO
 
 --Função Nativa
-SELECT DATEPART(WEEKDAY, '20/01/2020') DiaConsulta FROM Consulta;
+SELECT FORMAT (DataCon, 'dd/MM/yyyy')[Data Consulta], DATEPART(WEEKDAY, DataCon) DiaSemana FROM Consulta;
