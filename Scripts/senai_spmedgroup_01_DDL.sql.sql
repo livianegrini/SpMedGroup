@@ -145,10 +145,12 @@ CREATE TABLE Paciente(
    IdEndereco INT FOREIGN KEY REFERENCES Endereco(IdEndereco),
    Nome VARCHAR(70) NOT NULL,
    DataNascimento DATE NOT NULL,
-   Telefone CHAR(11),
+   Telefone CHAR(11) DEFAULT 'NÃO IDENTIFICADO',
    Rg INT NOT NULL UNIQUE,
    Cpf CHAR(11) NOT NULL UNIQUE
 );
 GO
+
+
 
 
