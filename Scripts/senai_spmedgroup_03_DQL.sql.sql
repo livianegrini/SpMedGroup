@@ -70,7 +70,7 @@ GO
 SELECT FORMAT (DataNascimento, 'dd/MM/yyyy')[Data Nascimento]  FROM Paciente;
 GO
 
---Função
+-- Função
 CREATE FUNCTION SituacaoConsulta()
 RETURNS TABLE
 AS
@@ -86,12 +86,11 @@ RETURN
  GO
 
  --Stored Procedure// Retorna número de consultas de um médico específico
- 
- CREATE PROCEDURE QuantidadeConsultas
+ ALTER PROCEDURE QuantidadeConsultas
 @Nome VARCHAR(30)
     AS
  BEGIN
- SELECT Consulta, Medico.Nome
+ SELECT IdClinica, Medico.Nome
  FROM Consulta
  INNER JOIN Medico
  ON Consulta.IdMedico = Medico.IdMedico
@@ -100,3 +99,7 @@ GO
 
 EXEC QuantidadeConsultas'Ricardo Lemos';
 GO
+
+
+--Função Nativa
+SELECT DATEPART(WEEKDAY, '20/01/2020') DiaConsulta FROM Consulta;
