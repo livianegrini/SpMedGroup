@@ -97,10 +97,30 @@ RETURN
  WHERE Medico.Nome = @Nome
 END;
 GO
-
-
+--Executando o Procedure
 EXEC QuantidadeConsultas'Helena Strada';
 GO
 
 --Função Nativa
 SELECT FORMAT (DataCon, 'dd/MM/yyyy')[Data Consulta], DATEPART(WEEKDAY, DataCon) DiaSemana FROM Consulta;
+
+
+--Função quantidade de médicos de uma determinada especialidade
+CREATE FUNCTION MedicoEspecialidade()
+RETURNS TABLE
+AS
+RETURN
+SELECT Nome, IdEspecialidade
+FROM Medico 
+WHERE IdEspecialidade = 16
+GO
+
+--Função para que retorne a idade do usuário a partir de uma determinada stored procedure
+CREATE PROCEDURE IdadePaciente
+AS 
+SELECT Nome Paciente,Rg, FORMAT (DataNascimento, 'dd/MM/yyyy') [Data Nascimento], DATEDIFF(YEAR, (Datanascimento), GETDATE()) 'Idade Paciente'
+FROM Paciente;
+GO
+--Executando a Procedure
+EXEC IdadePaciente;
+GO
